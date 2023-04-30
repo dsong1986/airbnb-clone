@@ -41,24 +41,46 @@ const RegisterModal = () => {
         }, 300)
     }, [registerModal.onClose]);
 
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    // const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    //     setIsLoading(true);
+
+    //     axios.post('/api/register', data)
+    //         .then(() => {
+    //             toast.success('Registered!');
+    //             registerModal.onClose();
+    //             //   loginModal.onOpen();
+    //         })
+    //         .catch((error) => {  
+    //             console.log(error)
+    //             toast.error('Something went wrong!');
+    //         })
+    //         .finally(() => {
+    //             setIsLoading(false);
+    //         })
+
+    // }
+
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+
         setIsLoading(true);
 
-        console.log('will call api register soon');
+        const res = axios.post('/api/register', data);
+        const error = (await res).data.error;
 
-        axios.post('/api/register', data)
-            .then(() => {
-                toast.success('Registered!');
-                registerModal.onClose();
-                //   loginModal.onOpen();
-            })
-            .catch((error) => {
+        if(!error){
+            toast.success('Registered!');
+            registerModal.onClose();
+            //   loginModal.onOpen();
+        }else {
+            if(error.code === 'P2002'){
+                toast.error('email already registered!');
+            }else {
                 toast.error('Something went wrong!');
-            })
-            .finally(() => {
-                setIsLoading(false);
-            })
-
+            }
+            
+        }
+       
+        setIsLoading(false);
     }
 
     const bodyContent = (

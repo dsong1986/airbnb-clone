@@ -49,6 +49,7 @@ it is installed when we created the project, skip it
 npm install prisma 
 npx prisma init
 npm install @prisma/client
+run `npx prisma db push `to create the unique constraint and index on the database?
 
 
 
