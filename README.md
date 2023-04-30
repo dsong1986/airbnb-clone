@@ -28,6 +28,6 @@ npx create-next-app@latest --typescript
 for default choice, please rember to choose to use [App]
 
 ### clean everything
-go to [page.tsx] delete <main> block, put <></> instead.
-go to [globals.css] delete everything
+go to `page.tsx` delete <main> block, put <></> instead.
+go to `globals.css` delete everything
 
