@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Avatar from '../Avatar'
 import { BsGlobe2 } from 'react-icons/bs'
 import { AiOutlineMenu } from 'react-icons/ai'
@@ -6,8 +6,15 @@ import { useCallback, useState } from "react"
 import MenuItem from "./MenuItem"
 import useRegisterModal from '@/app/hooks/useRegisterModal'
 import useLoginModal from '@/app/hooks/useLoginModal'
+import { User } from '@prisma/client'
+import { signOut } from 'next-auth/react'
 
-const UserMenu = () => {
+interface UserMenuProps {
+    currentUser?: User | null
+}
+const UserMenu: React.FC<UserMenuProps> = ({
+    currentUser,
+}) => {
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
     const [isOpen, setIsOpen] = useState(false);
@@ -46,11 +53,22 @@ const UserMenu = () => {
                                 bg-white  rounded-lg 
                                 border-[1px] shadow-md">
                     <div className="flex flex-col cursor-pointer ">
-                        <MenuItem onClick={loginModal.onOpen} label="Log in" weight="font-normal" />
-                        <MenuItem onClick={registerModal.onOpen} label="Sign up" weight="font-light"/>
-                        <hr />
-                        <MenuItem onClick={() => {}} label="Airbnb your home" weight="font-light" />
-                        <MenuItem onClick={() => {}} label="help" weight="font-light"/>
+                        {currentUser ? (
+                        <>
+                            <MenuItem onClick={() => {}} label="Account" weight="font-light" />
+                            <MenuItem onClick={() => {}} label="Trips" weight="font-light" />
+                            <MenuItem onClick={() => {}} label="Favorites" weight="font-light" />
+                            <MenuItem onClick={() => {}} label="Help" weight="font-light" />
+                            <MenuItem onClick={() => signOut()} label="Log out" weight="font-light" />
+                        </>) : (
+                        <>
+                            <MenuItem onClick={loginModal.onOpen} label="Log in" weight="font-normal" />
+                            <MenuItem onClick={registerModal.onOpen} label="Sign up" weight="font-light" />
+                            <hr />
+                            <MenuItem onClick={() => { }} label="Airbnb your home" weight="font-light" />
+                            <MenuItem onClick={() => { }} label="help" weight="font-light" />
+                        </>)}
+
                     </div>
 
                 </div>
