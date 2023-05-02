@@ -56,3 +56,7 @@ run `npx prisma db push `to create the unique constraint and index on the databa
 
 
 https://www.youtube.com/watch?v=EFucgPdjeNg
+
+
+query string
+https://www.npmjs.com/package/query-string

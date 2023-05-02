@@ -12,7 +12,8 @@ export const authOptions: AuthOptions = {
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID as string,
-      clientSecret: process.env.GITHUB_SECRET as string
+      clientSecret: process.env.GITHUB_SECRET as string,
+      allowDangerousEmailAccountLinking: true,
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -59,6 +60,7 @@ export const authOptions: AuthOptions = {
     
 
   },
+ 
   debug: process.env.NODE_ENV === 'development',
   session: {
     strategy: "jwt",

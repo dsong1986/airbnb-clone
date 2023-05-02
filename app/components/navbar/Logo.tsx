@@ -1,17 +1,21 @@
 'use client';
 
-import Image from 'next/image'
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-const Logo = () => (
-  <div className="grid-element">
+const Logo = () => {
+  const router = useRouter();
+
+  return ( 
     <Image
-        className='hidden md:block cursor-pointer'
-        src="/images/logo.png" 
-        height="100" 
-        width="100" 
-        alt="Logo" 
+      onClick={() => router.push('/')}
+      className="hidden md:block cursor-pointer" 
+      src="/images/logo.png" 
+      height="100" 
+      width="100" 
+      alt="Logo" 
     />
-  </div>
-)
-
-export default Logo
+   );
+}
+ 
+export default Logo;

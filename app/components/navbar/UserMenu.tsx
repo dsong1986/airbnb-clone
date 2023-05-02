@@ -8,9 +8,10 @@ import useRegisterModal from '@/app/hooks/useRegisterModal'
 import useLoginModal from '@/app/hooks/useLoginModal'
 import { User } from '@prisma/client'
 import { signOut } from 'next-auth/react'
+import { SafeUser } from '@/app/types';
 
 interface UserMenuProps {
-    currentUser?: User | null
+    currentUser?: SafeUser | null
 }
 const UserMenu: React.FC<UserMenuProps> = ({
     currentUser,
@@ -41,7 +42,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                         className="py-2 px-3 flex items-center gap-1 rounded-full border-[1px] cursor-pointer hover:shadow-md transition ">
                         <AiOutlineMenu />
                         <div className="hidden md:block">
-                            <Avatar />
+                            <Avatar src={currentUser?.image}/>
                         </div>
                     </div>
                 </div>
@@ -55,11 +56,12 @@ const UserMenu: React.FC<UserMenuProps> = ({
                     <div className="flex flex-col cursor-pointer ">
                         {currentUser ? (
                         <>
-                            <MenuItem onClick={() => {}} label="Account" weight="font-light" />
-                            <MenuItem onClick={() => {}} label="Trips" weight="font-light" />
-                            <MenuItem onClick={() => {}} label="Favorites" weight="font-light" />
-                            <MenuItem onClick={() => {}} label="Help" weight="font-light" />
-                            <MenuItem onClick={() => signOut()} label="Log out" weight="font-light" />
+                            <MenuItem onClick={() => {}} label="Account" weight="font-normal" />
+                            <MenuItem onClick={() => {}} label="Trips" weight="font-normal" />
+                            <MenuItem onClick={() => {}} label="Favorites" weight="font-normal" />
+                            <hr />
+                            <MenuItem onClick={() => {}} label="Help" weight="font-normal" />
+                            <MenuItem onClick={() => signOut()} label="Log out" weight="font-normal" />
                         </>) : (
                         <>
                             <MenuItem onClick={loginModal.onOpen} label="Log in" weight="font-normal" />

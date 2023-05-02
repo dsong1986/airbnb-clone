@@ -17,6 +17,8 @@ import Input from "../inputs/Input"
 import { log } from "console"
 import { toast } from 'react-hot-toast';
 import Button from "../Button"
+import {BsGithub} from 'react-icons/bs'
+import { signIn } from "next-auth/react"
 
 const RegisterModal = () => {
     const registerModal = useRegisterModal();
@@ -131,6 +133,12 @@ const RegisterModal = () => {
             />
             <Button
                 outline
+                label='Continue with Github'
+                icon={BsGithub}
+                onClick={() => signIn('github')}
+            />
+            {/* <Button
+                outline
                 label='Continue with Facebook'
                 icon={AiFillFacebook}
                 iconColor='#4267B2'
@@ -141,7 +149,8 @@ const RegisterModal = () => {
                 label='Continue with Apple'
                 icon={BsApple}
                 onClick={() => { }}
-            />
+            /> */}
+       
 
             <Button
                 outline

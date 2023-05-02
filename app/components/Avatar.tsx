@@ -1,12 +1,21 @@
 'use client';
-import { FaUserCircle } from 'react-icons/fa'
 
-const Avatar = () => {
-    return (
-        <div>
-            <FaUserCircle color="gray" size="26" />
-        </div>
-    )
+import Image from "next/image";
+
+interface AvatarProps {
+  src: string | null | undefined;
 }
 
-export default Avatar
+const Avatar: React.FC<AvatarProps> = ({ src }) => {
+  return ( 
+    <Image 
+      className="rounded-full" 
+      height="30" 
+      width="30" 
+      alt="Avatar" 
+      src={src || '/images/placeholder.jpg'}
+    />
+   );
+}
+ 
+export default Avatar;
