@@ -19,9 +19,11 @@ import { toast } from 'react-hot-toast';
 import Button from "../Button"
 import {BsGithub} from 'react-icons/bs'
 import { signIn } from "next-auth/react"
+import useLoginModal from "@/app/hooks/useLoginModal"
 
 const RegisterModal = () => {
     const registerModal = useRegisterModal();
+    const loginModal = useLoginModal();
     const [isLoading, setIsLoading] = useState(false);
 
     const {
@@ -42,6 +44,11 @@ const RegisterModal = () => {
             registerModal.onClose();
         }, 300)
     }, [registerModal.onClose]);
+
+    const onToggle = useCallback(() => {
+        registerModal.onClose();
+        loginModal.onOpen();
+    }, [loginModal, registerModal]);
 
     // const onSubmit: SubmitHandler<FieldValues> = (data) => {
     //     setIsLoading(true);
@@ -161,7 +168,7 @@ const RegisterModal = () => {
             <div className="text-xs text-gray-500 flex flex-row gap-1 mt-2 justify-center">
                 <div>Already have an account?</div>
                 <div
-                    onClick={registerModal.onClose}
+                    onClick={onToggle}
                     className="
                         hover:underline
                         cursor-pointer

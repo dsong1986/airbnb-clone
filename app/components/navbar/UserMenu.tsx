@@ -9,6 +9,7 @@ import useLoginModal from '@/app/hooks/useLoginModal'
 import { User } from '@prisma/client'
 import { signOut } from 'next-auth/react'
 import { SafeUser } from '@/app/types';
+import useHostModal from '@/app/hooks/useHostModal';
 
 interface UserMenuProps {
     currentUser?: SafeUser | null
@@ -19,15 +20,31 @@ const UserMenu: React.FC<UserMenuProps> = ({
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
     const [isOpen, setIsOpen] = useState(false);
+    const hostModal = useHostModal();
 
     const toggleOpen = useCallback(() => {
         setIsOpen((value) => !value);
     }, []);
 
+    // Callback function for host airbnb
+    const onHost = useCallback( () => {
+        //  if no user logged in, open login modal
+        if(!currentUser) {
+            loginModal.onOpen();
+        }
+
+        // otherwise, open the hose modal
+        hostModal.onOpen();
+
+    }, [currentUser,loginModal, hostModal]);
+
+
     return (
         <div className="relative">
             <div className="flex items-center justify-between gap-6">
-                <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition  cursor-pointer">
+                <div
+                    onClick={onHost} 
+                    className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition  cursor-pointer">
                     Switch to Hosting
                 </div>
 
@@ -59,6 +76,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                             <MenuItem onClick={() => {}} label="Account" weight="font-normal" />
                             <MenuItem onClick={() => {}} label="Trips" weight="font-normal" />
                             <MenuItem onClick={() => {}} label="Favorites" weight="font-normal" />
+                            <MenuItem onClick={hostModal.onOpen} label="Airbnb my home" weight="font-normal" />
                             <hr />
                             <MenuItem onClick={() => {}} label="Help" weight="font-normal" />
                             <MenuItem onClick={() => signOut()} label="Log out" weight="font-normal" />

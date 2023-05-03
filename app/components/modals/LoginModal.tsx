@@ -19,11 +19,13 @@ import { log } from "console"
 import { toast } from 'react-hot-toast';
 import Button from "../Button"
 import { useRouter } from "next/navigation";
+import useRegisterModal from "@/app/hooks/useRegisterModal"
 
 const LoginModal = () => {
 
     const router = useRouter();
     const loginModal = useLoginModal();
+    const registerModal = useRegisterModal();
     const [isLoading, setIsLoading] = useState(false);
 
     const {
@@ -45,6 +47,10 @@ const LoginModal = () => {
         }, 300)
     }, [loginModal.onClose]);
 
+    const onToggle = useCallback( () => {
+        loginModal.onClose();
+        registerModal.onOpen();
+    },[loginModal,registerModal]);
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
 
@@ -132,14 +138,14 @@ const LoginModal = () => {
                 onClick={() => { }}
             />
             <div className="text-xs text-gray-500 flex flex-row gap-1 mt-2 justify-center">
-                <div>Already have an account?</div>
+                <div>First time user? </div>
                 <div
-                    onClick={loginModal.onClose}
+                    onClick={onToggle}
                     className="
                         hover:underline
                         cursor-pointer
                          text-neutral-900
-                    ">Log in</div>
+                    ">Create account</div>
             </div>
 
         </div>
