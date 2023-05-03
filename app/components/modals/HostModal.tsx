@@ -5,6 +5,11 @@ import useHostModal from "@/app/hooks/useHostModal"
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
+import Heading from "../Heading";
+import CountrySelect from "../inputs/CountrySelect";
+import dynamic from "next/dynamic";
+
+
 
 enum STEPS {
     CATEGORY = 0,
@@ -50,6 +55,10 @@ const HostModal = () => {
         })
     }
     const category = watch('category')
+    const location = watch('location')
+    const Map = useMemo(
+        () => dynamic(()=>import('../Map'), {ssr:false}),
+    [location]);
 
     const onBack = () => {
         setStep((value) => value - 1)
@@ -92,7 +101,6 @@ const HostModal = () => {
             overflow-y-auto
             py-2
             pr-2
-            
             ">
                 {
                     categories.map((item) => (
@@ -112,6 +120,49 @@ const HostModal = () => {
             </div>
         </div>
     )
+
+    if(step === STEPS.LOCATION){
+        bodyContent = (
+            <div className = 'flex flex-col gap-4'>
+                <Heading
+                    title="Where is your place located"
+                    subTitle="Help guests find you"
+                />
+                {/* Select Country */}
+                <CountrySelect
+                    value={location}
+                    onChange={(value) => setCustomValue('location', value)}
+                />
+                {/* Map */}
+                <Map 
+                    center = {location?.latlng}
+                />
+            </div>
+        
+        )
+    }
+
+    if(step === STEPS.INFO) {
+        bodyContent = (
+            <div></div>
+        )
+    }
+
+    if(step === STEPS.IMAGES){
+        bodyContent=(
+            <div></div>
+        )
+    }
+    if(step === STEPS.DESCRIPTION){
+        bodyContent=(
+            <div></div>
+        )
+    }
+    if(step === STEPS.PRICE){
+        bodyContent=(
+            <div></div>
+        )
+    }
     return (
         <Modal
             isOpen={hostModal.isOpen}

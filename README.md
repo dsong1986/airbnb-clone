@@ -60,3 +60,20 @@ https://www.youtube.com/watch?v=EFucgPdjeNg
 
 query string
 https://www.npmjs.com/package/query-string
+
+
+countries
+https://www.npmjs.com/package/world-countries
+
+
+react select
+https://react-select.com/home
+
+
+
+leaflet for reactive map
+https://leafletjs.com/download.html
+
+npm i leaflet
+npm i -D @types/leaflet 
+npm i react-leaflet
