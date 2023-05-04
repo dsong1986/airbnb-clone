@@ -77,3 +77,7 @@ https://leafletjs.com/download.html
 npm i leaflet
 npm i -D @types/leaflet 
 npm i react-leaflet
+
+
+### Cloudinary
+https://next-cloudinary.spacejelly.dev/installation

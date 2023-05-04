@@ -9,7 +9,7 @@ import Heading from "../Heading";
 import CountrySelect from "../inputs/CountrySelect";
 import dynamic from "next/dynamic";
 import HostPlaceInput from "../inputs/HostPlaceInput";
-
+import ImageUpload from "../inputs/ImageUpload";
 
 enum STEPS {
     CATEGORY = 0,
@@ -59,6 +59,7 @@ const HostModal = () => {
     const guestCount = watch('guestCount')
     const roomCount = watch('roomCount')
     const bathroomCount = watch('bathroomCount')
+    const imageSrc = watch('imageSrc')
 
     const Map = useMemo(
         () => dynamic(() => import('../Map'), { ssr: false }),
@@ -146,6 +147,7 @@ const HostModal = () => {
         )
     }
 
+    // Step 3: fill in basic counter information about hosting
     if (step === STEPS.INFO) {
         bodyContent = (
             <div className="flex flex-col gap-4">
@@ -177,9 +179,19 @@ const HostModal = () => {
         )
     }
 
+    // Step 3: upload images
     if (step === STEPS.IMAGES) {
         bodyContent = (
-            <div></div>
+            <div>
+                <Heading 
+                    title = "Add a photo of your place"
+                    subTitle="Show guests what your place looks like"
+                />
+                <ImageUpload 
+                    onChange={(value) => setCustomValue('imageSrc', value)}
+                    value = {imageSrc}
+                />
+            </div>
         )
     }
     if (step === STEPS.DESCRIPTION) {
