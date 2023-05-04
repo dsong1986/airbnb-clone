@@ -6,6 +6,8 @@ import {
     UseFormRegister 
 } from 'react-hook-form'
 
+import {BiDollar} from 'react-icons/bi'
+
 interface InputProps {
     id: string;
     label: string;
@@ -14,6 +16,7 @@ interface InputProps {
     errors: FieldErrors;
     register: UseFormRegister<FieldValues>;
     required?: boolean;
+    formatPrice?: boolean
  
 }
 const Input: React.FC<InputProps> = ({
@@ -24,11 +27,24 @@ const Input: React.FC<InputProps> = ({
     register,
     required,
     errors,
+    formatPrice
  
 }) => {
    
     return (
         <div className='w-full relative'>
+            {formatPrice && (
+                <BiDollar
+                size={20}  
+                className="
+                  text-neutral-700
+                  absolute
+                  top-3
+                  left-2
+                "
+              />
+            )
+            }
            <input 
                 id={id}
                 type={type}
@@ -48,9 +64,9 @@ const Input: React.FC<InputProps> = ({
                     transition
                     disabled:opacity-70
                     disabled:cursor-not-allowed
+                    ${formatPrice ? 'pl-9' : 'pl-4'}
                     ${errors[id] ? 'border-rose-500' : 'border-neutral-300'}
                     ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}
-                    
                 `}
             />
             
@@ -65,14 +81,13 @@ const Input: React.FC<InputProps> = ({
                 z-9
                 left-2
                 origin-[0] 
+                ${formatPrice ? 'left-9' : 'left-4'}
                 peer-placeholder-shown:scale-100
                 peer-placeholder-shown:translate-y-0
                 peer-focus:scale-75
                 peer-focus:-translate-y-4
                 peer-focus:-translate-x-1
-                ${errors[id] ? 'text-rose-500' : 'text-zinc-400'}
-         
-               
+                ${errors[id] ? 'text-rose-500' : 'text-zinc-400'}               
             `}>
                 {label}
             </label>
