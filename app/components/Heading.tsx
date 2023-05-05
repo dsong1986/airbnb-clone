@@ -12,20 +12,25 @@ const Heading: React.FC<HeadingProps> = ({
     center
 }) => {
     return (
-        <div className="p-3">
+        <div className={center?'text-center' : 'text-start'}>
+            
+            {/* Title  */}
             <div className="
             font-semibold
             text-xl
             pb-1
-        ">
+            ">
                 {title}
             </div>
+            
+            {/* Sub Title */}
             <div className="
-            text-sm
-            text-gray-400
-        ">
+                text-sm
+              text-gray-400
+            ">
                 {subTitle}
             </div>
+        
         </div>
     )
 }

@@ -31,6 +31,7 @@ const Button: React.FC<ButtonProps> = ({
             disabled:opacity-70
             disabled:cursor-not-allowed
             border-[1px]
+        
             ${outline? 'hover:bg-neutral-100' : ''}
            
             ${outline ? 'bg-white' : 'bg-rose-500'}

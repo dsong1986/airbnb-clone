@@ -99,7 +99,7 @@ const Categories = () => {
     return (
         <Container>
             <div className="
-            pt-4
+            pt-1
             gap-4
             flex flex-row
             items-center 
